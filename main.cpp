@@ -1,82 +1,72 @@
 #include <iostream>
-#include "include/GlobalConst.h"
+#include <string>
+#include <vector>
+#include <stdlib.h>
+#include <cassert>
 
-//#include <vector>
-//#include <chrono>
-//#include <time.h>
-//#include <thread>
-//#include <iostream>
-
-/*
-#include <iomanip>
-#include <chrono>
-#include <ctime>
-#include <thread>
-*/
-
-/*
-void f()
-{
-    volatile double d = 0;
-    for(int n=0; n<10000; ++n)
-        for(int m=0; m<10000; ++m)
-            d += d*n*m;
+void draw(auto min,auto higher){
+	auto pas=2;
+	int i=0;
+	while(i<100){
+		if (i< min) std::cout<<"-";
+		else {
+			if (i< higher) std::cout<<"|";
+			else std::cout<<"x";
+		}
+		i=i+pas;
+	}	
+	std::cout<<'\n';
 }
-*/
 
-// /*
-void tt(){
-    l<<"Trying tt voidFunc";
+void draw_scale(){
+	auto pas=2;
+	int i=0;
+	while(i<100){
+		std::cout<<i/10;
+		i=i+pas;
+	}	
+	std::cout<<'\n';
 }
-// */
-/*
-int main() {
-    l << "Starting Main";
-    d.restart();
 
-    std::thread t1(f);
-    std::thread t2(f); // f() is called on two threads
-    std::thread t3(f); // f() is called on two threads
-    t1.join();
-    t2.join();
-    t3.join();
+ int main(int argc, char* argv[]) {
+	 if (argc < 5) {
+        std::cerr << "5 chiffres, separé dun espace, de 5* à 1*"  <<'\n';
+        return 1;
+    }
+	 std::cout<<"Excellent : "<<argv[1] <<'\n';
+	 std::cout<<"Bon : "<<argv[2] <<'\n';
+	 std::cout<<"Acceptable : "<<argv[3] <<'\n';
+	 std::cout<<"mauvais : "<<argv[4] <<'\n';
+	 std::cout<<"pitoyable : "<<argv[5] <<'\n'<<'\n';
+	 
+	 std::string::size_type sz;   // alias of size_t
 
-    d.end();
-    d.show_all();
 
-    return 0;
+	 auto excellent=std::stoi (argv[1],&sz);
+	 auto bon=std::stoi (argv[2],&sz);
+	 auto moyen=std::stoi (argv[3],&sz);
+	 auto faible=std::stoi (argv[4],&sz);
+	 auto mauvais=std::stoi (argv[5],&sz);
+	 
+	 
+	 auto nb=excellent+bon+moyen+faible+mauvais;
+	 
+	 
+	 auto ok= excellent+bon;
+	 auto okpct=(double)ok/nb*100;
+	 
+	 auto ex_in_ok=(double)excellent/ok*100;
+		 
+	 auto moyenpct=(double)moyen/nb*100;
+	
+	 auto ko=faible+mauvais;
+	 auto kopct=(double)ko/nb*100;
+	 auto mauvais_in_ko=(double)mauvais/ko*100;
+		 
+	 std::cout<<"ok " << okpct << " _ " << ex_in_ok<< "|"<< moyenpct <<"|"<< kopct<<" _ "<< mauvais_in_ko<<'\n'<<'\n';
+	draw_scale();
+	draw((double)excellent/nb*100,okpct);
+	draw(0,moyenpct);
+	 draw((double)mauvais/nb*100,kopct);
+	return 0;
 }
-// */
- /*
-int main()
-{
-    std::clock_t c_start = std::clock();
-    auto t_start = std::chrono::high_resolution_clock::now();
-    std::thread t1(f);
-    std::thread t2(f); // f() is called on two threads
-    std::thread t3(f); // f() is called on two threads
-
-    t1.join();
-    t2.join();
-    t3.join();
-
-    std::clock_t c_end = std::clock();
-    auto t_end = std::chrono::high_resolution_clock::now();
-
-    std::cout << std::fixed << std::setprecision(2) << "CPU time used: "
-              << 1000.0 * (c_end-c_start) / CLOCKS_PER_SEC << " ms\n"
-              << "Wall clock time passed: "
-              << std::chrono::duration<double, std::milli>(t_end-t_start).count()
-              << " ms\n";
-}
- */
-
-// /*
- int main() {
-   l <<"1" ;
-
-//    l << "1"; //"Test";
-
-    return 0;
-}
-//*/
